@@ -1,5 +1,5 @@
 ## Currency converter
-![](https://files.fm/thumb_show.php?i=ta6wrqcva)
+![](https://files.fm/thumb_show.php?i=y3ksgdaxs)
 
 **🌿 branch**: currency-converter
 
