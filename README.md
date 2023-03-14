@@ -17,13 +17,13 @@ Each project is stored in a separate branch.
 
 
 ## Quiz 
-(https://files.fm/thumb_show.php?i=4x9ppqew7)
+![](https://files.fm/thumb_show.php?i=4x9ppqew7)
 
 **🌿 branch**: `quiz`
 
 
 ## Users list
-(https://files.fm/thumb_show.php?i=ta6wrqcva)
+![](https://files.fm/thumb_show.php?i=ta6wrqcva)
 
 **🌿 branch**: `users`
 
@@ -33,7 +33,7 @@ Each project is stored in a separate branch.
     Adding/removing users from an invitation array
 
 ## Currency converter
-(https://files.fm/thumb_show.php?i=ta6wrqcva)
+![](https://files.fm/thumb_show.php?i=ta6wrqcva)
 
 **🌿 branch**: currency-converter
 
@@ -41,7 +41,7 @@ Each project is stored in a separate branch.
     Conversion of one currency to another and vice versa
 
 ## A collection of photos
-(https://files.fm/thumb_show.php?i=2z5947b9e)
+![](https://files.fm/thumb_show.php?i=2z5947b9e)
 
 **🌿 branch**: `photos`
 
