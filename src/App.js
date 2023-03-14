@@ -1,62 +1,78 @@
 import {useState, useEffect} from 'react';
-import { Block } from './Block';
+
+import { Collection } from './Collections';
+
 import './index.scss';
 
 function App() {
-  const [fromCurrency, setFromCurrency] = useState('UAH')
-  const [toCurrency, setToCurrency] = useState('USD')
-  const [rates, setRates] = useState([])
-  const [fromValue, setFromValue] = useState(0)
-  const [toValue, setToValue] = useState(0)
+  const [collections, setConllections] = useState([])
+  const [serchValue, setSearchValue] = useState('')
+  const [categoryId, setCategoryId] = useState(0)
+  const [isLoading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
 
+  const categories =  [
+    { "name": "Всі" },
+    { "name": "Море" },
+    { "name": "Гори" },
+    { "name": "Архітектура" },
+    { "name": "Міста" }
+  ]
   useEffect(() => {
-    fetch('https://bank.gov.ua/NBUStatService/v1/statdirectory/exchange?json')
+    const category = categoryId ? `category=${categoryId}` : ''
+
+    setLoading(true)
+
+    fetch(`https://640f4968cde47f68db46c131.mockapi.io/photo-collections?page=${page}&limit=3&${category}`)
       .then(res => res.json())
-      .then(json => setRates([...json]))
-      .catch(err => console.Error(err))
-  }, [])
-
-  const onChangeFromValue = (value) => {
-    const fromRate = fromCurrency === 'UAH' ? 1 : rates.filter(el => el.cc === fromCurrency)[0].rate
-    const toRate = toCurrency === 'UAH' ? 1 : rates.filter(el => el.cc === toCurrency)[0].rate
-    const result = ((value / toRate) * fromRate).toFixed(2)
-
-    setToValue(result)
-    setFromValue(value)
-  }
-
-  const onChangeToValue = (value) => {
-    const fromRate = fromCurrency === 'UAH' ? 1 : rates.filter(el => el.cc === fromCurrency)[0].rate
-    const toRate = toCurrency === 'UAH' ? 1 : rates.filter(el => el.cc === toCurrency)[0].rate
-    const result = ((value / fromRate)* toRate).toFixed(2)
-
-    setToValue(value)
-    setFromValue(result)
-  }
-
-  const onChangeFromCurrency = (value) => {
-    setFromCurrency(value)
-    onChangeFromValue(fromValue)
-  }
-  
-  const onChangeToCurrency = (value) => {
-    setToCurrency(value)
-    // onChangeToValue(toValue)
-    onChangeFromValue(fromValue)
-  }
+      .then(json => setConllections(json))
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false))
+  }, [categoryId, page])
 
   return (
     <div className="App">
-      <Block 
-        onChangeValue={onChangeFromValue} 
-        value={fromValue} currency={fromCurrency} 
-        onChangeCurrency={onChangeFromCurrency} />
-      <Block 
-        onChangeValue={onChangeToValue} 
-        value={toValue} currency={toCurrency} 
-        onChangeCurrency={onChangeToCurrency} />
+      <h1>Моя коллекція фотографій</h1>
+      <div className="top">
+        <ul className="tags">
+          {/* <li className="active">Все</li> */}
+          {categories.map((category, i) => {
+            return (
+              <li
+                key={i}
+                onClick={() => setCategoryId(i)}
+                className={i === categoryId ? "active" : ""} >
+                  {category.name}
+              </li>
+            )
+          })}
+        </ul>
+        <input 
+          value={serchValue} 
+          onChange={e => setSearchValue(e.target.value)}
+          className="search-input" 
+          placeholder="Пошук по назві" />
+      </div>
+          {isLoading ? <h2>Загрузка...</h2> : <div className="content">
+        {collections
+          .filter(elem => elem.name.toLowerCase().includes(serchValue.toLowerCase()))
+          .map((item, i) => (
+            <Collection
+              name={item.name}
+              images={item.photos}/>
+        ))}
+      </div>}
+      <ul className="pagination">
+        {[...Array(4)].map((_, i) => {
+          return <li 
+                    className={page === i + 1 ? 'active' : ''}
+                    onClick={() => setPage(i + 1)} >
+                    {i + 1}
+                  </li>
+        })}
+      </ul>
     </div>
   );
 }
 
-export default App;
+export default App
