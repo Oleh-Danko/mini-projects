@@ -1,16 +1,15 @@
-# mini-projects
 # Mini projects from ReactJS
 
 Each project is stored in a separate branch.
 
 ## Counter
-![1660249082356](https://files.fm/thumb_show.php?i=ks9jnukhw)
+![](https://files.fm/thumb_show.php?i=ks9jnukhw)
 
 **🌿 branch**: `counter`
 
 
 ## Modal
-![1660249082356](https://files.fm/thumb_show.php?i=ua3qy6cch)
+![](https://files.fm/thumb_show.php?i=ua3qy6cch)
 
 **🌿 branch**: `modal`
 
