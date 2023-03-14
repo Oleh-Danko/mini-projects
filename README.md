@@ -4,7 +4,7 @@
 Each project is stored in a separate branch.
 
 ## Counter
-(https://files.fm/thumb_show.php?i=ks9jnukhw)
+![1660249082356](https://files.fm/thumb_show.php?i=ks9jnukhw)
 
 **🌿 branch**: `counter`
 
